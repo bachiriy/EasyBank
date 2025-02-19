@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: account-service  # Service name (must match the config file name)
+  cloud:
+    config:
+      uri: http://localhost:8888  # Config Server URL
