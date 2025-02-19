@@ -1,0 +1,20 @@
+server:
+  port: 8080  # Gateway will run on port 8080
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: customer-service
+          uri: lb://CUSTOMER-SERVICE  # "lb" means load-balanced via Eureka
+          predicates:
+            - Path=/api/customers/**  # Route requests starting with /api/customers
+        - id: account-service
+          uri: lb://ACCOUNT-SERVICE  # "lb" means load-balanced via Eureka
+          predicates:
+            - Path=/api/accounts/**  # Route requests starting with /api/accounts
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka  # Eureka server URL
