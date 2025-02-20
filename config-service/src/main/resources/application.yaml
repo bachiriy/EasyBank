@@ -8,4 +8,5 @@ spring:
       server:
         git:
           uri: https://github.com/bachiriy/easybank  
+          search-paths: configurations
           clone-on-start: true
