@@ -3,11 +3,15 @@ package com.customer.service.service.impl;
 import com.customer.service.service.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.customer.service.dto.request.CustomerRequest;
 import com.customer.service.dto.response.CustomerResponse;
 import com.customer.service.repository.CustomerRepository;
 import com.customer.service.mapper.CustomerMapper;
 
+
+@Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired CustomerRepository customerRepository;
     @Autowired CustomerMapper customerMapper;
