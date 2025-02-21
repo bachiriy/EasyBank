@@ -22,13 +22,13 @@ public class CustomerController {
 
     // add customer
     @PostMapping
-    public CustomerResponse addCustomer(@Valid CustomerRequest customer){
+    public CustomerResponse addCustomer(@RequestBody @Valid CustomerRequest customer){
         return customerService.addCustomer(customer);
     }
 
     // get customer by id 
-    @GetMapping
-    public CustomerResponse getCustomerById(@PathVariable long id){
+    @GetMapping("/{id}")
+    public CustomerResponse getCustomerById(@PathVariable Long id){
         return customerService.getCustomerById(id);
     }
 }

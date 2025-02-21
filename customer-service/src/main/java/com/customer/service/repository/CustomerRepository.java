@@ -8,4 +8,6 @@ import com.customer.service.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+    boolean existsByNameAndEmail(String name, String email);
 }

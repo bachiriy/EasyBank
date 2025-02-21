@@ -7,6 +7,6 @@ import com.customer.service.dto.response.CustomerResponse;
 public interface CustomerService {
    List<CustomerResponse> getCustomers();
    CustomerResponse addCustomer(CustomerRequest customer);
-   CustomerResponse getCustomerById(long id);
+   CustomerResponse getCustomerById(Long id);
 }
 

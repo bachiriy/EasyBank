@@ -3,15 +3,15 @@ package com.customer.service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
+@Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
     private String email;
