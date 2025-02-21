@@ -3,7 +3,6 @@ package com.customer.service.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.customer.service.entity.Customer;
 import com.customer.service.dto.response.CustomerResponse;
 import com.customer.service.dto.request.CustomerRequest;
 import com.customer.service.service.impl.CustomerServiceImpl;
