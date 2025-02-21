@@ -2,10 +2,13 @@ package com.customer.service.service.impl;
 
 import com.customer.service.service.CustomerService;
 import java.util.List;
-import com.customer.service.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.customer.service.dto.request.CustomerRequest;
+import com.customer.service.dto.response.CustomerResponse;
+import com.customer.service.repository.CustomerRepository;
 
 public class CustomerServiceImpl implements CustomerService {
-    @AutoWired CustomerRepository customerRepository;
+    @Autowired CustomerRepository customerRepository;
 
     public List<CustomerResponse> getCustomers(){
         // TODO: mapping
