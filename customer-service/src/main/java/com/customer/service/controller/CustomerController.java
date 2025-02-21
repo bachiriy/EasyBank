@@ -7,6 +7,8 @@ import com.customer.service.dto.response.CustomerResponse;
 import com.customer.service.dto.request.CustomerRequest;
 import com.customer.service.service.impl.CustomerServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
@@ -20,7 +22,7 @@ public class CustomerController {
 
     // add customer
     @PostMapping
-    public CustomerResponse addCustomer(CustomerRequest customer){
+    public CustomerResponse addCustomer(@Valid CustomerRequest customer){
         return customerService.addCustomer(customer);
     }
 
