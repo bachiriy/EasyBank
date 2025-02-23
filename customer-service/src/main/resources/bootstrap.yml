@@ -1,11 +1,9 @@
 spring:
   application:
-    name: customer-service  # Must match the config file name in Config Service
+    name: customer-service  
   cloud:
     config:
-      uri: http://localhost:8888  # URL of the Config Service
+      uri: http://localhost:8888  
   config:
     import: "configserver:"
 
-# server:
-#   port: 8081
