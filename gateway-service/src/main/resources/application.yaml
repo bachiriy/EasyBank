@@ -1,5 +1,5 @@
 server:
-  port: 8080  # Gateway will run on port 8080
+  port: 8080  
 spring:
   application:
     name: gateway-service
@@ -7,14 +7,14 @@ spring:
     gateway:
       routes:
         - id: customer-service
-          uri: lb://CUSTOMER-SERVICE  # "lb" means load-balanced via Eureka
+          uri: lb://CUSTOMER-SERVICE  
           predicates:
-            - Path=/api/customers/**  # Route requests starting with /api/customers
+            - Path=/api/customers/**  
         - id: account-service
-          uri: lb://ACCOUNT-SERVICE  # "lb" means load-balanced via Eureka
+          uri: lb://ACCOUNT-SERVICE  
           predicates:
-            - Path=/api/accounts/**  # Route requests starting with /api/accounts
+            - Path=/api/accounts/**  
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka  # Eureka server URL
+      defaultZone: http://localhost:8761/eureka  
