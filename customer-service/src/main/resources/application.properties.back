@@ -1,0 +1,5 @@
+# In application.properties within the service
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.enabled=true
+springdoc.api-docs.path=/v3/api-docs
+springdoc.api-docs.enabled=true
