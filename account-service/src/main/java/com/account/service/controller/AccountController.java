@@ -5,33 +5,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import jakarta.validation.Valid;
 
-// import com.customer.service.dto.response.AccountResponse;
-// import com.customer.service.dto.request.AccountRequest;
-// import com.customer.service.service.impl.AccountServiceImpl;
+import com.account.service.dto.response.AccountResponse;
+import com.account.service.dto.request.AccountRequest;
+import com.account.service.service.impl.AccountServiceImpl;
 
 
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
-    // @Autowired AccountServiceImpl customerService;
+    @Autowired AccountServiceImpl accountService;
 
-    // all customers
+    // all accounts 
     @GetMapping
-    // public List<AccountResponse> getAccounts(){
-    public String getAccounts(){
-        // return customerService.getAccounts();
-        return "accounts";
+    public List<AccountResponse> getAccounts(){
+        return this.accountService.getAccounts();
     }
 
-    // add customer
-    // @PostMapping
-    // public AccountResponse addAccount(@RequestBody @Valid AccountRequest customer){
-    //     return customerService.addAccount(customer);
-    // }
+    // add accounts 
+    @PostMapping
+    public AccountResponse addAccount(@RequestBody @Valid AccountRequest account){
+        return this.accountService.addAccount(account);
+    }
 
-    // get customer by id 
-    // @GetMapping("/{id}")
-    // public AccountResponse getAccountById(@PathVariable Long id){
-    //     return customerService.getAccountById(id);
-    // }
+    // get account by id  
+    @GetMapping("/{id}")
+    public AccountResponse getAccountById(@PathVariable Long id){
+        return this.accountService.getAccountById(id);
+    }
+
+
+    // get customer accounts by customerId  
+    @GetMapping("/customer/{customerId}")
+    public List<AccountResponse> getCustomerAccounts(@PathVariable Long customerId){
+        return this.accountService.getCustomerAccounts(customerId);
+    }
 }
