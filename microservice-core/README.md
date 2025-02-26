@@ -1,168 +1,220 @@
-# EasyBank - Modern Banking Microservices
+# EasyBank - Microservice Core
 
-A modern banking application built with microservices architecture using Spring Boot and Spring Cloud, allowing management of customers and their banking accounts through REST APIs.
+## Overview
 
-## About EasyBank
+EasyBank Microservice Core is a modern banking application backend built on a microservices architecture using Spring Boot and Spring Cloud. This system provides robust API endpoints for managing bank customers and accounts with high scalability, maintainability, and performance.
 
-EasyBank is a robust, scalable banking system designed to provide seamless banking operations through microservices architecture. The platform enables efficient customer management and account operations while ensuring high availability and fault tolerance.
+## Microservices Architecture
 
-## Architecture Overview
+![Microservices Architecture Diagram]
 
-The application consists of five microservices:
+The application is composed of the following microservices:
 
 1. **Customer Service**: Manages customer information
-2. **Account Service**: Handles account operations and management
-3. **Gateway Service**: Acts as an API gateway using Spring Cloud Gateway
-4. **Discovery Service**: Service registry and discovery with Eureka
-5. **Config Service**: Centralized configuration management connected to Git repository
+2. **Account Service**: Handles accounts and their operations
+3. **Gateway Service**: Serves as a single entry point for all API requests
+4. **Discovery Service**: Provides service registration and discovery via Eureka
+5. **Config Service**: Manages centralized configuration from a Git repository
 
 ## Features
 
 ### Customer Service
-- Create new customers
+- Add new customers
 - List all customers
-- Search customers by ID
-- Database: Relational database (configurable)
+- Find a customer by ID
 
 ### Account Service
-- Create new accounts (Current/Savings)
-- View account details
-- List customer accounts
-- Database: Relational database (configurable)
-- Communicates with Customer Service via RestTemplate
+- Create new accounts (Current or Savings)
+- Retrieve account details
+- List all accounts for a customer
+- Communication with Customer Service to validate customer data
 
-## Technical Stack
+### Gateway Service
+- Route API requests to appropriate microservices
+- Load balancing
+- Request filtering and transformation
 
-- **Framework**: Spring Boot
-- **Database Access**: Spring Data JPA
-- **Service Discovery**: Spring Cloud Netflix Eureka
-- **API Gateway**: Spring Cloud Gateway
-- **Configuration**: Spring Cloud Config
-- **Inter-service Communication**: RestTemplate
-- **Testing**: JUnit, Mockito
-- **API Testing**: Postman
-- **Project Management**: Jira
-- **Version Control**: Git
+### Discovery Service
+- Service registration
+- Service discovery
+- Health monitoring
 
-## Getting Started
+### Config Service
+- Centralized configuration management
+- Dynamic property updates
+- Environment-specific configurations
 
-### Prerequisites
-- Java 17 or higher
-- Maven
-- Git
-- Your preferred IDE 
-- Postman for API testing
+## Tech Stack
 
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/bachiriy/easybank
-```
-
-2. Configure your database settings in `application.yml` files
-
-3. Start the services in the following order:
-   - Config Service
-   - Discovery Service
-   - Customer Service
-   - Account Service
-   - Gateway Service
-
-### Service Ports
-- Config Service: 8888
-- Discovery Service: 8761
-- Customer Service: 8081
-- Account Service: 8082
-- Gateway Service: 8889
-
-## API Documentation
-
-### Customer Service Endpoints
-
-```
-POST /api/customers - Create a new customer
-GET /api/customers - Get all customers
-GET /api/customers/{id} - Get customer by ID
-```
-
-### Account Service Endpoints
-
-```
-POST /api/accounts - Create a new account
-GET /api/accounts/{id} - Get account by ID
-GET /api/accounts/customer/{customerId} - Get all accounts for a customer
-```
+- **Java 17**
+- **Spring Boot 3.x**: For building microservices
+- **Spring Data JPA**: For database operations
+- **Spring Cloud**:
+  - Eureka: For service discovery
+  - Gateway: For API gateway
+  - Config: For centralized configuration
+- **RestTemplate**: For inter-service communication
+- **PostgreSQL**: Relational database for persistent storage
+- **Maven**: For dependency management and build
+- **Docker**: For containerization
+- **JUnit & Mockito**: For testing
 
 ## Project Structure
 
 ```
-easybank-microservices/
-├── config-service/
-├── discovery-service/
-├── gateway-service/
+easybank-microservice-core/
 ├── customer-service/
-│   ├── src/main/java/
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── repositories/
-│   │   ├── entities/
-│   │   └── dto/
-│   └── src/test/java/
-└── account-service/
-    ├── src/main/java/
-    │   ├── controllers/
-    │   ├── services/
-    │   ├── repositories/
-    │   ├── entities/
-    │   └── dto/
-    └── src/test/java/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/easybank/customer/
+│   │   │   │   ├── controller/
+│   │   │   │   ├── service/
+│   │   │   │   ├── repository/
+│   │   │   │   ├── entity/
+│   │   │   │   ├── dto/
+│   │   │   │   ├── mapper/
+│   │   │   │   └── exceptions/
+│   │   │   └── resources/
+│   │   └── test/
+│   └── pom.xml
+├── account-service/
+│   ├── src/
+│   │   ├── main/...
+│   │   └── test/...
+│   └── pom.xml
+├── gateway-service/
+│   ├── src/...
+│   └── pom.xml
+├── discovery-service/
+│   ├── src/...
+│   └── pom.xml
+├── config-service/
+│   ├── src/...
+│   └── pom.xml
+└── pom.xml
 ```
 
-## Testing
+## Getting Started
 
-- Unit tests are implemented using JUnit and Mockito
-- API testing can be performed using the provided Postman collection
-- Run tests using Maven:
-```bash
-mvn test
+### Prerequisites
+
+- Java 17
+- Maven
+- Git
+- Docker (optional)
+- PostgreSQL (or any relational database)
+
+### Installation and Setup
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/bachiriy/EasyBank
+   cd EasyBank/microservice-core
+   ```
+
+2. Set up the configuration repository:
+   ```
+   cd configurations
+   git init
+   git add .
+   git commit -m "Initial configuration"
+   ```
+
+3. Update the `config-service/src/main/resources/application.yml` to point to your config repository.
+
+4. Start the services in the following order:
+   ```
+   # Build all services
+   mvn clean package
+   
+   # Start services in order
+   cd config-service
+   mvn spring-boot:run
+   
+   cd ../discovery-service
+   mvn spring-boot:run
+   
+   cd ../customer-service
+   mvn spring-boot:run
+   
+   cd ../account-service
+   mvn spring-boot:run
+   
+   cd ../gateway-service
+   mvn spring-boot:run
+   ```
+
+### Docker Deployment
+
+A `docker-compose.yml` file is provided for easy deployment:
+
+```
+docker-compose up -d
 ```
 
-## UML Diagrams
+### API Documentation
 
--  UML Diagrams (Use Case and Class Diagram): [Link to diagrams](https://lucid.app/lucidchart/8f822acf-bce7-4586-b07d-9d7d5bae6602/edit?page=0_0&invitationId=inv_2e888661-24c7-4a1a-89d5-13bb0debafbf#)
+Once the services are running, access the Swagger documentation:
 
-## Contributing
+- Customer Service: http://localhost:8081/swagger-ui.html
+- Account Service: http://localhost:8082/swagger-ui.html
+- Gateway API: http://localhost:8888/swagger-ui.html
 
-1. Create a feature branch
-2. Commit your changes
-3. Push to the branch
-4. Create a Pull Request
+## Development Guidelines
 
-## Development Timeline
+### Architecture Pattern
 
-- Start Date: 17/02/2025
-- End Date: 21/02/2025
+Follow clean architecture principles:
+- Controllers handle HTTP requests and responses
+- Services contain business logic
+- Repositories interact with the database
+- DTOs for data transfer between layers
+- Mappers for entity-DTO conversions
 
-## Performance Criteria
+### Database Design
 
-- Implementation of all specified customer and account management functionalities
-- Reliable inter-service communication with proper error handling
-- Operational service discovery via Eureka
-- Proper implementation of layered architecture with design patterns
-- Comprehensive unit test coverage
-- Clean, documented code following Java best practices
-- Centralized configuration properly synchronized with Git repository
-- Version control with Git and Agile project management
+- Each service has its own database schema
+- Use JPA entities with proper relationships
+- Implement database migrations with Flyway
 
-## Future Enhancements
+### Error Handling
 
-- Implementation of security microservice with stateless authentication
-- Addition of transaction management
-- Implementation of notification service
-- Performance monitoring and logging
+- Use global exception handlers
+- Return appropriate HTTP status codes
+- Provide meaningful error messages
 
-## Contact
+### Testing
 
-[My Email](mailto:el.bachiri.mohammed@student.youcode.ma)
+- Write unit tests for services and repositories
+- Implement integration tests for API endpoints
+- Aim for at least 80% code coverage
 
+## Monitoring and Management
+
+- Actuator endpoints for monitoring service health
+- Eureka dashboard for service status visualization
+- Spring Boot Admin for application monitoring
+
+## Security (Bonus)
+
+- JWT-based authentication
+- Role-based authorization
+- Secure API endpoints with Spring Security
+
+## CI/CD Pipeline
+
+- GitHub Actions workflow for continuous integration
+- Automated testing
+- Docker image building and publishing
+
+## Future Improvements
+
+- [ ] Add transaction service for money transfers
+- [ ] Implement Circuit Breaker pattern with Resilience4j
+- [ ] Set up distributed tracing with Spring Cloud Sleuth and Zipkin
+- [ ] Add API rate limiting
+- [ ] Implement event-driven architecture with Kafka
+
+## License
+
+This project is licensed under the MIT License.
