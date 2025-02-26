@@ -19,6 +19,13 @@ public class GlobalExceptionHandler {
 				.message(ex.getMessage()).build();
 	}
 
+	@ExceptionHandler(GeneralException.class)
+	@ResponseStatus(value = HttpStatus.BAD_GATEWAY)
+	public ExceptionMessage GeneralExceptionHandler(GeneralException ex) {
+		return ExceptionMessage.builder().status(HttpStatus.BAD_GATEWAY.value()).error(HttpStatus.BAD_GATEWAY.toString())
+				.message(ex.getMessage()).build();
+	}
+
 	@ExceptionHandler(ResourceAlreadyExistsException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public ExceptionMessage ResourceAlreadyExistsExceptionHandler(ResourceAlreadyExistsException ex) {

@@ -29,9 +29,13 @@ public class AccountServiceImpl implements AccountService {
 
     public AccountResponse addAccount(AccountRequest account){
         if (!this.accountRepository.existsByCustomerIdAndType(account.getCustomerId(), account.getType())) {
-            RestTemplateProvider.getCustomer(account.getCustomerId()); // will fail if customer does not exists.
-            Account accountToSave = accountMapper.accountRequestToAccount(account);
-            return accountMapper.map(this.accountRepository.save(accountToSave));
+            if (!RestTemplateProvider.customerExistsById(account.getCustomerId())) {
+                throw new ResourceNotFoundException("Customer with this ID does not exists");
+                // return null;
+            } else {
+                Account accountToSave = accountMapper.accountRequestToAccount(account);
+                return accountMapper.map(this.accountRepository.save(accountToSave));
+            }
         } else throw new ResourceAlreadyExistsException("Account already exists, Customer can not have more than two different accounts.");
     }
 
@@ -45,14 +49,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public List<AccountResponse> getCustomerAccounts(Long customerId){
-        if (customerId == null) throw new ResourceNotFoundException("Customer ID is NULL.");
+        if (customerId == null) {
+            throw new ResourceNotFoundException("Customer ID is NULL.");
+        }
 
-        List<Account> customerAccounts = this.accountRepository.findAllByCustomerId(customerId); 
-
-        if (customerAccounts != null) {
-            RestTemplateProvider.getCustomer(customerId); // will fail if customer does not exists.
-            return this.accountMapper.map(customerAccounts); 
-        } else throw new ResourceNotFoundException("Customer with this ID has no accounts.");
-
+        return this.accountMapper.map(this.accountRepository.findAllByCustomerId(customerId)); 
     }
 }

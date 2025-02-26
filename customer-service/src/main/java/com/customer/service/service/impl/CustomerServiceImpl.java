@@ -11,6 +11,7 @@ import com.customer.service.dto.request.CustomerRequest;
 import com.customer.service.dto.response.CustomerResponse;
 import com.customer.service.entity.Customer;
 import com.customer.service.exceptions.ResourceAlreadyExistsException;
+import com.customer.service.exceptions.ResourceNotFoundException;
 import com.customer.service.repository.CustomerRepository;
 import com.customer.service.mapper.CustomerMapper;
 
@@ -31,11 +32,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
     public CustomerResponse getCustomerById(Long id){
         Optional<Customer> customerFound = this.customerRepository.findById(id);
-        CustomerResponse customerResponse = null;
-
         if (customerFound.isPresent()) {
-            customerResponse = this.customerMapper.map(customerFound.get());
-        }        
-        return customerResponse;
+            return this.customerMapper.map(customerFound.get());
+        } else throw new ResourceNotFoundException("Customer with this ID does not exists."); 
     }
 }
