@@ -7,7 +7,8 @@ spring:
     config:
       server:
         git:
-          # uri: https://github.com/bachiriy/easybank  
-          uri: /home/exshy/Documents/GitHub/Briefs/Microservices/EasyBank
+          uri: https://github.com/bachiriy/EasyBank
+          # for offline use
+          # uri: /home/...path_to.../EasyBank
           search-paths: configurations
           clone-on-start: true
