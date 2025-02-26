@@ -9,5 +9,5 @@ spring:
         git:
           # uri: https://github.com/bachiriy/easybank  
           uri: /home/exshy/Documents/GitHub/Briefs/Microservices/EasyBank
-          search-paths: configurations
+          search-paths: microservice-core/configurations
           clone-on-start: true
