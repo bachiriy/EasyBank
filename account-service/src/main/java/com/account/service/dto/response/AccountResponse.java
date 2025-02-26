@@ -12,5 +12,5 @@ public class AccountResponse {
     private Long id; 
     private Double balance;
     private AccountType type;
-    private CustomerResponse customer; 
+    private Long customerId;
 }
