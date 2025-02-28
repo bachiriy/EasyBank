@@ -16,14 +16,16 @@ const NewClient: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const [errs, setErrs] = useState<{nameErr: string, emailErr: string}>({nameErr: "", emailErr: ""});
+    const [errs, setErrs] = useState<{nameErr: string, emailErr: string }>({nameErr: "", emailErr: ""});
     const [msg, setMsg] = useState<string>();
+    const [errorMessage, setErrorMessage] = useState<string>();
 
     useEffect(() => {
        const cleanMsgs = setTimeout(() => {
            setErrs({nameErr: "", emailErr: ""});
            setMsg("");
-       }, 6000); 
+           setErrorMessage("");
+       }, 10000); 
        return () => clearTimeout(cleanMsgs);
     }, [errs, msg]);
 
@@ -49,6 +51,9 @@ const NewClient: React.FC = () => {
                     emailErr: errors.email || null,
                 });
             }
+            if (error.response.data.message) {
+               setErrorMessage(error.response.data.message);
+            }
         });
 
     }
@@ -58,6 +63,7 @@ const NewClient: React.FC = () => {
     return (
         <>
           {msg && <p className="text-green-500 border p-2 rounded-xl">{msg}</p>}
+          {errorMessage && <p className="text-red-500 border p-2 rounded-xl">{errorMessage}</p>}
 
             <form onSubmit={postCustomer}>
                 <Input error={errs?.nameErr !== ""} placeholder="Customer Name"  name="name" value={name} onChange={e => setName(e.target.value)}/>
