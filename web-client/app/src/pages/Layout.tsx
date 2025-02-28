@@ -4,15 +4,13 @@ const Layout = () => {
   return (
     <>
       <nav>
-        <ul>
+        <ul className="flex justify-between m-4 bg-black text-white">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/clients">Clients</Link>
           </li>
           <li>
             <Link to="/accounts">Accounts</Link>
           </li>
-
-
         </ul>
       </nav>
 
