@@ -6,10 +6,13 @@ const Layout = () => {
       <nav>
         <ul className="flex justify-between m-4 bg-black text-white">
           <li>
-            <Link to="/clients">Clients</Link>
+            <Link to="/">Customers</Link>
           </li>
           <li>
             <Link to="/accounts">Accounts</Link>
+          </li>
+          <li>
+            <Link to="/clients/new">Acc Customer</Link>
           </li>
         </ul>
       </nav>

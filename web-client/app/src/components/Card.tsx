@@ -3,7 +3,7 @@ import { Customer } from "../interface/Customer";
 
 const Card: React.FC<{customer: Customer}> = ({ customer }: { customer: Customer }) => {
    return (
-        <div key={customer.id} className={"space-y-16 m-3 "}>
+        <div className={"space-y-16 m-3 "}>
             <div className={"w-72 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110 " + (customer.accounts.length > 1 ? " h-96" : "h-80")}>
                 <img className="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png" />
                 <div className="w-full px-8 absolute top-8">

@@ -14,9 +14,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="clients" element={<Clients />} /> 
-        <Route path="clients/new" element={<NewClient />} />
-
+        <Route path='*' element={<Clients />} /> 
+        <Route index element={<Clients />} /> 
+        <Route path="customers/new" element={<NewClient />} />
         <Route path="accounts" element={<Accounts />} />
       </Route>
     </Routes>
