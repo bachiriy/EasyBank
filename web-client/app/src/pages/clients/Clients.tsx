@@ -40,8 +40,6 @@ const Clients = () => {
         try {
             const response: AxiosResponse = await client.get(``);
             if (response.status === 200 && response.data.lenght != 0) {
-                console.log(response);
-                
                 setCustomers(response.data);
             }  
             setLoading(false);
@@ -57,8 +55,6 @@ const Clients = () => {
           {err && <p className="text-red-500 border p-2 rounded-xl">{err}</p>}
           {msg && <p className="text-green-500 border p-2 rounded-xl">{msg}</p>}
 
-
-          {/* <Button props={{color: 'green', content: 'Create New Client', path: '/clients/new'}}/> */}
           <div className="w-auto flex justify-end mx-4">
               <Link to="/customers/new">
                   <Button variant="outlined" color="success">Create New Customer</Button>
