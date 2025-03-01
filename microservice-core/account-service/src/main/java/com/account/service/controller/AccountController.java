@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import com.account.service.dto.response.AccountResponse;
 import com.account.service.dto.request.AccountRequest;
 import com.account.service.service.impl.AccountServiceImpl;
-
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -38,5 +38,11 @@ public class AccountController {
     @GetMapping("/customer/{customerId}")
     public List<AccountResponse> getCustomerAccounts(@PathVariable Long customerId){
         return this.accountService.getCustomerAccounts(customerId);
+    }
+
+    // delete customer accounts by customerId  
+    @DeleteMapping("/customer/{customerId}")
+    public ResponseEntity<String> deleteCustomerAccounts(@PathVariable Long customerId){
+        return this.accountService.deleteCustomerAccounts(customerId);
     }
 }
