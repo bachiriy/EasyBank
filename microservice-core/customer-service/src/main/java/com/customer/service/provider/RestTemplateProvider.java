@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,19 @@ public class RestTemplateProvider {
             throw new GeneralException(e.getMessage());
         }
         
+    }
+
+    public static boolean deleteCustomerAccounts(Long customerId){
+        String url = "http://mh:8080/api/accounts/customer/" + customerId;
+        try {
+            HttpEntity<String> entity = new HttpEntity<String>(new HttpHeaders());
+            ResponseEntity<String> resp = rest.exchange(url, HttpMethod.DELETE, entity, String.class);
+            if (resp.getStatusCode().equals(HttpStatus.OK)) {
+               return true; 
+            } else return false;
+        } catch (Exception e) {
+            throw new GeneralException(e.getMessage());
+        }
     }
 }
 

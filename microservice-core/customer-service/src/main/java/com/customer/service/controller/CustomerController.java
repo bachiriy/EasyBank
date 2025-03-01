@@ -6,6 +6,7 @@ import java.util.List;
 import com.customer.service.dto.response.CustomerResponse;
 import com.customer.service.dto.request.CustomerRequest;
 import com.customer.service.service.impl.CustomerServiceImpl;
+import org.springframework.http.ResponseEntity; 
 
 import jakarta.validation.Valid;
 
@@ -30,5 +31,17 @@ public class CustomerController {
     @GetMapping("/{id}")
     public CustomerResponse getCustomerById(@PathVariable Long id){
         return customerService.getCustomerById(id);
+    }
+
+    // update customer
+    @PutMapping("/{id}")
+    public CustomerResponse updateCustomer(@PathVariable Long id, @RequestBody CustomerRequest customer){
+        return customerService.updateCustomer(id, customer);
+    }
+
+    // delete customer
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long id){
+        return customerService.deleteCustomer(id);
     }
 }
