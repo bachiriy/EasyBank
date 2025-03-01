@@ -66,7 +66,7 @@ const Clients = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 md:mx-44">
-            {customers && customers.map((c: Customer, i: number) => <Card key={i}customer={c} /> )}
+            {customers && customers.map((c: Customer, i: number) => <Card key={i} customer={c} /> )}
           </div>
         </>
     ); 

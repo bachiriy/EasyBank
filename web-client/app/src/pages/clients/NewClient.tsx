@@ -68,9 +68,9 @@ const NewClient: React.FC = () => {
             <form onSubmit={postCustomer}>
                 <Input error={errs?.nameErr !== ""} placeholder="Customer Name"  name="name" value={name} onChange={e => setName(e.target.value)}/>
                 {errs?.nameErr && <p className="text-red-500 border p-2 rounded-xl">{errs.nameErr}</p>}
-                <Input error={errs?.emailErr !== ""} name="email" value={email} onChange={e => setEmail(e.target.value)}/>
+                <Input error={errs?.emailErr !== ""} placeholder="Customer Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
                 {errs?.emailErr && <p className="text-red-500 border p-2 rounded-xl">{errs.emailErr}</p>}
-                <Button type="submit" variant="outlined" color="success">{loading ? "Loading..." : "Save Customer"}</Button>
+                <Button type="submit" variant="outlined" color="success">{loading ? "Loading..." : "Create Customer"}</Button>
             </form>
         </>
     );

@@ -1,9 +1,16 @@
 import React from "react";
 import { Customer } from "../interface/Customer";
+import {  useNavigate } from 'react-router-dom';
 
 const Card: React.FC<{customer: Customer}> = ({ customer }: { customer: Customer }) => {
+    const navigate = useNavigate();
+
+    const navigateToEditCustomer = () => {
+        navigate("/customers/" + customer.id + "/edit");
+    }
+
    return (
-        <div className={"space-y-16 m-3 "}>
+        <div onClick={navigateToEditCustomer} className={"space-y-16 m-3 "}>
             <div className={"w-72 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110 " + (customer.accounts.length > 1 ? " h-96" : "h-80")}>
                 <img className="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png" />
                 <div className="w-full px-8 absolute top-8">
