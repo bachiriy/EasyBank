@@ -58,8 +58,6 @@ const NewClient: React.FC = () => {
 
     }
 
-    // if (loading) return <p>loading...</p>;
-
     return (
         <>
           {msg && <p className="text-green-500 border p-2 rounded-xl">{msg}</p>}

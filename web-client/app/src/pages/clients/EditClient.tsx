@@ -58,7 +58,6 @@ const EditClient: React.FC = () => {
                 goBack();
             } 
         }).catch(error => {
-            console.log(error);
             if (error.response.data) {
                 setErr(error.response.data);
             }
@@ -73,15 +72,30 @@ const EditClient: React.FC = () => {
         return () => clearTimeout(timeOut);
     } 
 
+    const deleteCustomer = async () => {
+        setLoading(true);
+        await client.delete(`/${id}`, { headers: { 'Accept': 'application/json' } as RawAxiosRequestHeaders})
+        .then(response => {
+            if (response.status === 200) {
+                setSucc(response.data);
+                goBack();
+            } 
+        }).catch(error => {
+            if (error.response.data) {
+                setErr(error.response.data);
+            }
+        });
+        setLoading(false);
+    } 
+
     if (loading) return <p>loading...</p>;
     if(err) return <p className="text-red-500 border">{err}</p>;
     if(succ) return <p className="text-green-500 border">{succ}</p>;
 
     return (
         <>
-            {/* TODO: Handle Customer Delete */}
             <div className="absolute right-0 px-4">
-                <Button variant="contained" color="error">Delete This Customer</Button>
+                <Button onClick={deleteCustomer} variant="contained" color="error">Delete This Customer</Button>
             </div>
 
             <form onSubmit={putCustomer}>
