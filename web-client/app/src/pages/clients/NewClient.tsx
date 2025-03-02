@@ -55,7 +55,6 @@ const NewClient: React.FC = () => {
                setErrorMessage(error.response.data.message);
             }
         });
-
     }
 
     return (
