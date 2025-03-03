@@ -52,9 +52,16 @@ const Clients = () => {
     if (loading) return <div>Loading...</div>;
     return (
         <>
-          {err && <p className="text-red-500 border p-2 rounded-xl">{err}</p>}
-          {msg && <p className="text-green-500 border p-2 rounded-xl">{msg}</p>}
-
+        {err && (
+            <p className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md mb-4">
+            {err}
+            </p>
+        )}
+        {msg && (
+            <p className="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md mb-4">
+            {msg}
+            </p>
+        )}
           <div className="w-auto flex justify-end mx-4">
               <Link to="/customers/new">
                   <Button variant="outlined" color="success">Create New Customer</Button>

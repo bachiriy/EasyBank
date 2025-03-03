@@ -89,8 +89,8 @@ const EditClient: React.FC = () => {
     } 
 
     if (loading) return <p>loading...</p>;
-    if(err) return <p className="text-red-500 border">{err}</p>;
-    if(succ) return <p className="text-green-500 border">{succ}</p>;
+    if(err) return <p className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md mb-4">{err}</p>;
+    if(succ) return <p className="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md mb-4">{succ}</p>;
 
     return (
         <>
@@ -98,12 +98,42 @@ const EditClient: React.FC = () => {
                 <Button onClick={deleteCustomer} variant="contained" color="error">Delete This Customer</Button>
             </div>
 
-            <form onSubmit={putCustomer}>
-                <Input placeholder="Customer Name"  name="name" value={name} onChange={e => setName(e.target.value)}/>
-                <Input placeholder="Customer Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                <Button type="submit" variant="outlined" color="primary">{loading ? "Loading..." : "Save Customer"}</Button>
-            </form>
-
+            <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md relative">
+              {/* Edit Form */}
+              <form onSubmit={putCustomer}>
+                {/* Customer Name Input */}
+                <div className="mb-4">
+                  <Input
+                    placeholder="Customer Name"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+            
+                {/* Customer Email Input */}
+                <div className="mb-6">
+                  <Input
+                    placeholder="Customer Email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+            
+                {/* Save Button */}
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  color="primary"
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {loading ? "Loading..." : "Save Customer"}
+                </Button>
+              </form>
+            </div>
         </>
     );
 };

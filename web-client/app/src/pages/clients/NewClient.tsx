@@ -59,17 +59,57 @@ const NewClient: React.FC = () => {
 
     return (
         <>
-          {msg && <p className="text-green-500 border p-2 rounded-xl">{msg}</p>}
-          {errorMessage && <p className="text-red-500 border p-2 rounded-xl">{errorMessage}</p>}
+          {msg && 
+            <p className="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md mb-4">
+          {msg}</p>}
+          {errorMessage && <p className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md mb-4">{errorMessage}</p>}
 
-            <form onSubmit={postCustomer}>
-                <Input error={errs?.nameErr !== ""} placeholder="Customer Name"  name="name" value={name} onChange={e => setName(e.target.value)}/>
-                {errs?.nameErr && <p className="text-red-500 border p-2 rounded-xl">{errs.nameErr}</p>}
-                <Input error={errs?.emailErr !== ""} placeholder="Customer Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                {errs?.emailErr && <p className="text-red-500 border p-2 rounded-xl">{errs.emailErr}</p>}
-                <Button type="submit" variant="outlined" color="success">{loading ? "Loading..." : "Create Customer"}</Button>
-            </form>
-        </>
+          <form onSubmit={postCustomer} className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+            {/* Customer Name Input */}
+            <div className="mb-4">
+              <Input
+                error={errs?.nameErr !== ""}
+                placeholder="Customer Name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errs?.nameErr && (
+                <p className="mt-2 text-sm text-red-600 bg-red-50 border-l-4 border-red-500 p-2 rounded-lg">
+                  {errs.nameErr}
+                </p>
+              )}
+            </div>
+          
+            {/* Customer Email Input */}
+            <div className="mb-6">
+              <Input
+                error={errs?.emailErr !== ""}
+                placeholder="Customer Email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errs?.emailErr && (
+                <p className="mt-2 text-sm text-red-600 bg-red-50 border-l-4 border-red-500 p-2 rounded-lg">
+                  {errs.emailErr}
+                </p>
+              )}
+            </div>
+          
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              variant="outlined"
+              color="success"
+              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {loading ? "Loading..." : "Create Customer"}
+            </Button>
+          </form>
+</>
     );
 };
 export default NewClient;
