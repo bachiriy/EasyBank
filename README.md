@@ -27,14 +27,16 @@ EasyBank is a modern banking application built with a microservices architecture
 
 ## Quick Start
 1. Clone the repository
-2. Start backend services (see [Backend README](./microservice-core/README.md))
-3. Start frontend application (see [Frontend README](./web-client/README.md))
+2. Start the whole application by running the following script: 
+```bash
+./run.sh
+```
 4. Access the application at http://localhost:3000
 
 ## Documentation
-- [Frontend Documentation](./web-client/README.md)
-- [Backend Documentation](./microservice-core/README.md)
-- [Configurations Documentation](./configurations/README.md)
+- Take a look at backend services (see [Backend README](./microservice-core/README.md))
+- Take a look at frontend application (see [Frontend README](./web-client/README.md))
+- configurations [Configurations Documentation](./configurations/README.md)
 
 ## Project Management
 - [Jira Board](https://mohammedelbachiri945.atlassian.net/jira/software/projects/EAS/boards/334/backlog)
