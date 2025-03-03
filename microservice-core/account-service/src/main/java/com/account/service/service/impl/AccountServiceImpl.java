@@ -68,9 +68,5 @@ public class AccountServiceImpl implements AccountService {
         } catch (Exception e) {
             return new ResponseEntity<String>("Failed deleting customer accounts. ERROR: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        // List<Account> qureyReturn = this.accountRepository.removeByCustomerId(customerId);
-       // if (qureyReturn.size() > 0) {
-       //    return new ResponseEntity<String>("Customer accounts deleted with success. method return : " + String.valueOf(qureyReturn), HttpStatus.OK); 
-       // } else return new ResponseEntity<String>("Failed deleting customer accounts.", HttpStatus.BAD_REQUEST);
-    }
+   }
 }

@@ -55,8 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public ResponseEntity<String> deleteCustomer(Long id){
-        Optional<Customer> dbCustomer = this.customerRepository.findById(id);
-        if (dbCustomer.isPresent()) {
+        if (this.customerRepository.existsById(id)) {
             boolean deletedCustomerAccounts = RestTemplateProvider.deleteCustomerAccounts(id);
             if (deletedCustomerAccounts) {
                 customerRepository.deleteById(id);
