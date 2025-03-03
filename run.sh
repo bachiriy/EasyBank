@@ -79,6 +79,7 @@ cat > "$ROOT_DIR/stop.sh" << 'EOF'
 #!/bin/bash
 echo "Stopping all services..."
 
+# Stop backend services
 for pid_file in logs/*.pid; do
     if [ -f "$pid_file" ]; then
         service_name=$(basename "$pid_file" .pid)
@@ -88,6 +89,13 @@ for pid_file in logs/*.pid; do
         rm "$pid_file"
     fi
 done
+
+# Stop frontend service
+if [ -f "logs/frontend.pid" ]; then
+    echo "Stopping frontend (pkill node)"
+    pkill node
+    rm "logs/frontend.pid"
+fi
 
 echo "All services stopped"
 EOF
@@ -171,7 +179,7 @@ done
 # Start the React frontend
 echo -e "${YELLOW}=== Starting React Frontend ===${NC}"
 cd "$ROOT_DIR/web-client/app" || { 
-    echo -e "${RED}web-client directory not found!${NC}"; 
+    echo -e "${RED}web-client/app directory not found!${NC}"; 
     exit 1; 
 }
 
